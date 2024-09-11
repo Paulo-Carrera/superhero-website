@@ -29,4 +29,4 @@ URL: https://superheroapi.com/?ref=apilist.fun
 DATABASE SETUP COMMAND:
 psql -U username -f setup.sql
 
-Deployed URL : 
+Deployed URL : Deployed Website URL : https://superhero-website-8.onrender.com 
