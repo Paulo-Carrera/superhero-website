@@ -25,3 +25,6 @@ Publishers / Universes,
 Descriptions
 
 URL: https://superheroapi.com/?ref=apilist.fun
+
+
+Deployed URL : 
