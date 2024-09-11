@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Your Profile</h1>
+
+    <hr>
+    
+    <div class="profile-header">
+        <img src="{{ current_user.profile_image }}" alt="Profile Image" class="profile-image">
+        <h2>{{ current_user.username }}</h2>
+    </div>
+
+    <div class="profile-details">
+        <p><strong>Email:</strong> {{ current_user.email }}</p>
+    </div>
+    
+    <div class="profile-actions">
+        <a href="{{ url_for('app.edit_profile') }}" class="btn btn-primary">Edit Profile</a>
+        <a href="{{ url_for('app.favorites') }}" class="btn btn-info">View Favorites</a>
+        <a href="{{ url_for('app.logout') }}" class="btn btn-danger">Log Out</a>
+        <a href="{{ url_for('app.delete_profile') }}" class="btn btn-danger">Delete Profile</a>
+    </div>
+    
+    <hr>
+</div>
+
+{% endblock %}

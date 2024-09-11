@@ -1,0 +1,196 @@
+/* General styling for the character container */
+.character-container {
+  padding: 20px;
+  margin: 15px;
+  border-radius: 10px;
+  text-align: center;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  color: #fff;
+  background-color: #222; /* Dark background for a superhero feel */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Aura styling for different alignments */
+.character-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  z-index: -1; /* Positioned behind the container */
+  pointer-events: none; /* Ensure it's not blocking interactions */
+}
+
+/* Good alignment aura always visible */
+.character-container.good-alignment::before {
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.6) 10%, rgba(0, 102, 255, 0.3) 30%, rgba(0, 0, 0, 0) 70%);
+  border: 2px solid rgba(0, 102, 255, 0.8);
+}
+
+/* Bad alignment aura always visible */
+.character-container.bad-alignment::before {
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.6) 10%, rgba(255, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0) 70%);
+  border: 2px solid rgba(255, 0, 0, 0.8);
+}
+
+/* Neutral alignment aura always visible */
+.character-container.neutral-alignment::before {
+  background: radial-gradient(circle, purple 10%, purple 30%, rgba(255, 255, 255, 0.4) 60%, rgba(0, 0, 0, 0) 70%);
+  border: 2px solid purple;
+}
+
+/* Hover effect for the character container (optional, if you still want some effect on hover) */
+.character-container:hover {
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+/* Character image styling */
+.character-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 3px solid grey; /* Gold border for a superhero touch */
+}
+
+/* Styling for character details */
+.character-details {
+  margin-top: 10px;
+}
+
+/* Container for side-by-side comparison */
+.comparison-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Individual comparison items */
+.comparison-item {
+  width: 45%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #333; /* Dark background for contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+}
+
+/* Styling for hero comparison */
+.hero-comparison {
+  margin-top : 100px;
+}
+
+/* Styling for hero images */
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 2px solid grey; /* Gold border for consistency */
+}
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  margin: auto;
+  width: 500px;
+  height: 500px;
+  margin-top: 50px;
+  margin-bottom: 300px;
+}
+
+/* Hide all slides by default */
+.mySlides {
+  display: none;
+  position: relative;
+}
+
+/* Fade in effect for slides */
+.fade {
+  animation: fade 2s ease-in-out infinite;
+}
+
+@keyframes fade {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Styling for character images in the slideshow */
+.mySlides img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 5px solid grey; /* Gold border for a superhero effect */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.mySlides img:hover {
+  transform: scale(1.05);
+}
+
+/* Styling for character names */
+.character-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.hero-comparison {
+  display: flex;
+  justify-content: space-around;
+}
+
+.hero {
+  flex: 1;
+  margin: 0 10px;
+  text-align: center;
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-stats {
+  text-align: left;
+}
+
+.suggestion-item:hover{
+  cursor: pointer;
+}
+
+.profile-image {
+  max-width: 100px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid grey; /* Gold border for a superhero touch */
+}
+
+.footer{
+  text-align: center;
+  font-size: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

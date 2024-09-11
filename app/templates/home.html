@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>Superhero Hub</h1>
+<p>Welcome to the Superhero Hub!</p>
+
+<hr>
+
+{% if favorite_characters|length >= 3 %}
+<h1 style="text-align: center">Your Favorite Characters</h1>
+<p style="text-align: center">Add More <a href="{{ url_for('app.search') }}">Here</a>!</p>
+<div class="slideshow-container">
+    {% for character in favorite_characters %}
+    <div class="mySlides fade">
+        {% if character.image %}
+        <img src="{{ character.image.url }}" style="width:100%; max-width: 600; height: auto;">
+        {% if character.biography.publisher %}
+        <div class="character-name">{{ character.biography.publisher }}'s {{ character.name | upper }}</div>
+        {% else %}
+        <div class="character-name">{{ character.name | upper }}</div>
+        {% endif %}
+        {% else %}
+        <p>No image available</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+
+<p>Add at least 3 favorite characters for a slideshow <a href="{{ url_for('app.search') }}">here</a>.</p>
+
+{% endif %}
+
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+{% endblock %}

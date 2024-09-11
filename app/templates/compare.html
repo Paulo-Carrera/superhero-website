@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Compare Superheroes{% endblock %}
+
+{% block content %}
+<h1>Compare Two Superheroes</h1>
+
+<form method="POST" action="{{ url_for('app.compare') }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.hero1.label(class="form-label") }}
+        {{ form.hero1(id="hero1-input", class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.hero2.label(class="form-label") }}
+        {{ form.hero2(id="hero2-input", class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+        <a class="btn btn-secondary" href="{{ url_for('app.home') }}">Back</a>
+    </div>
+</form>
+
+<script>
+    // Array of hero names for the placeholders
+    const heroNames = [
+        'Spider-Man',
+        'Iron Man',
+        'Wonder Woman',
+        'Batman',
+        'Superman',
+        'Ozymandias',
+        'Godzilla',
+        'Black Panther',
+        'Captain America',
+        'Thor',
+        'Hulk',
+        'Wolverine',
+        'Master Chief',
+        'Joker',
+        'Deadpool',
+        'Captain Marvel',
+        'Black Widow',
+        'Hawkeye',
+        'Doctor Strange',
+        'Captain America',
+        'Deadpool',
+        'Goku',
+        'Venom',
+        'Mister Fantastic',
+        'Red Hulk',
+        'Red Hood',
+        'Captain Atom',
+        'Ant-Man',
+        'Catwoman'
+    ];
+
+    // Get the hero input elements
+    const hero1Input = document.getElementById('hero1-input');
+    const hero2Input = document.getElementById('hero2-input');
+
+    let lastIndex1 = -1;
+    let lastIndex2 = -1;
+
+    // Function to get a random index, ensuring it's different from the last one
+    function getRandomIndex(lastIndex) {
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * heroNames.length);
+        } while (randomIndex === lastIndex); // Ensure it's not the same as the last one
+        return randomIndex;
+    }
+
+    // Function to set random placeholder for both heroes
+    function changePlaceholders() {
+        let randomIndex1 = getRandomIndex(lastIndex1);
+        let randomIndex2;
+
+        // Ensure the two heroes are not the same
+        do {
+            randomIndex2 = getRandomIndex(lastIndex2);
+        } while (randomIndex1 === randomIndex2);
+
+        // Update placeholders
+        hero1Input.setAttribute('placeholder', heroNames[randomIndex1]);
+        hero2Input.setAttribute('placeholder', heroNames[randomIndex2]);
+
+        // Update last indexes
+        lastIndex1 = randomIndex1;
+        lastIndex2 = randomIndex2;
+    }
+
+    // Start by immediately changing the placeholders
+    changePlaceholders();
+
+    // Then change the placeholders every 3 seconds
+    setInterval(changePlaceholders, 3000);
+</script>
+
+{% endblock %}
+

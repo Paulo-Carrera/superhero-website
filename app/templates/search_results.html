@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Search Results</h1>
+<a href="{{ url_for('app.search') }}" class="btn btn-primary">Back to Search</a>
+{% if results %}
+    <div class="character-list">
+        {% for character in results %}
+            <div class="character-container {% if character.biography.alignment == 'good' %}good-alignment{% elif character.biography.alignment == 'bad' %}bad-alignment{% elif character.biography.alignment == 'neutral' %}neutral-alignment{% endif %}">
+                <h2>{{ character.name }}</h2>
+                <img src="{{ character.image }}" alt="{{ character.name }}" class="character-image">
+                <!-- <pre>{{ character | tojson(indent=2) }}</pre> -->
+                <p><strong>Full Name:</strong> {{ character.biography['full-name'] if character.biography['full-name'] else 'N/A' }}</p>
+                <p><strong>Aliases:</strong> {{ character.biography.aliases | join(', ') if character.biography.aliases else 'None' }}</p>
+                <p><strong>Place of Birth:</strong> {{ character.biography['place-of-birth'] if character.biography['place-of-birth'] else 'N/A' }}</p>
+                <p><strong>First Appearance:</strong> {{ character.biography['first-appearance'] if character.biography['first-appearance'] else 'N/A' }}</p>
+                <p><strong>Publisher:</strong> {{ character.biography.publisher if character.biography.publisher else 'N/A' }}</p>
+                <p><strong>Alignment:</strong> {{ character.biography.alignment if character.biography.alignment else 'Unknown' }}</p>
+                <form action="{{ url_for('app.add_favorite', character_id=character.api_id) }}" method="post">
+                    {% if character.biography.alignment == 'good' %}
+                    <button type="submit" class="btn btn-primary">Add to Favorites</button>
+                    {% elif character.biography.alignment == 'bad' %}
+                    <button type="submit" class="btn btn-danger">Add to Favorites</button>
+                    {% elif character.biography.alignment == 'neutral' %}
+                    <button type="submit" class="btn" style="background-color: purple;">Add to Favorites</button>
+                    {% endif %}
+                </form>                
+                <hr>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+
+{% endblock %}
+
+
+

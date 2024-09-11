@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Hero Comparison</h1>
+<a href="{{ url_for('app.compare') }}" class="btn btn-primary">Back to Compare</a></a>
+<div class="hero-comparison">
+    <div class="hero">
+        <h2>{{ comparison.hero1.name }}</h2>
+        <!-- <pre>{{ comparison.hero1 | tojson(indent=2) }}</pre> -->
+        <img src="{{ comparison.hero1.image_url }}" alt="{{ comparison.hero1.name }}" class="hero-image" />
+        <div class="hero-stats">
+            <h3>Powerstats</h3>
+            <ul>
+                <li>Intelligence: {{ comparison.hero1.powerstats.intelligence }}</li>
+                <li>Strength: {{ comparison.hero1.powerstats.strength }}</li>
+                <li>Speed: {{ comparison.hero1.powerstats.speed }}</li>
+                <li>Durability: {{ comparison.hero1.powerstats.durability }}</li>
+                <li>Power: {{ comparison.hero1.powerstats.power }}</li>
+                <li>Combat: {{ comparison.hero1.powerstats.combat }}</li>
+            </ul>
+            <h3>Biography</h3>
+            <p>Full Name: {{ comparison.hero1.biography['full-name'] }}</p>
+            <p>First Appearance: {{ comparison.hero1.biography['first-appearance'] }}</p>
+            <p>Publisher: {{ comparison.hero1.biography.publisher }}</p>
+            <p>Alignment: {{ comparison.hero1.biography.alignment }}</p>
+        </div>
+    </div>
+
+    <div class="hero">
+        <h2>{{ comparison.hero2.name }}</h2>
+        <!-- <pre>{{ comparison.hero2 | tojson(indent=2) }}</pre> -->
+        <img src="{{ comparison.hero2.image_url }}" alt="{{ comparison.hero2.name }}" class="hero-image" />
+        <div class="hero-stats">
+            <h3>Powerstats</h3>
+            <ul>
+                <li>Intelligence: {{ comparison.hero2.powerstats.intelligence }}</li>
+                <li>Strength: {{ comparison.hero2.powerstats.strength }}</li>
+                <li>Speed: {{ comparison.hero2.powerstats.speed }}</li>
+                <li>Durability: {{ comparison.hero2.powerstats.durability }}</li>
+                <li>Power: {{ comparison.hero2.powerstats.power }}</li>
+                <li>Combat: {{ comparison.hero2.powerstats.combat }}</li>
+            </ul>
+            <h3>Biography</h3>
+            <p>Full Name: {{ comparison.hero2.biography['full-name'] }}</p>
+            <p>First Appearance: {{ comparison.hero2.biography['first-appearance'] }}</p>
+            <p>Publisher: {{ comparison.hero2.biography.publisher }}</p>
+            <p>Alignment: {{ comparison.hero2.biography.alignment }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

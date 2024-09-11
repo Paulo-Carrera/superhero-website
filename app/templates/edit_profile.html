@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<h1>Edit Profile</h1>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.username.label }}
+        {{ form.username() }}
+    </div>
+    <div>
+        {{ form.email.label }}
+        {{ form.email() }}
+    </div>
+    <div>
+        {{ form.profile_image.label }}
+        {{ form.profile_image() }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+<a href="{{ url_for('app.profile') }}">Back to Profile</a>
+<a href="{{ url_for('app.delete_profile') }}" style="color:red">Delete Profile</a>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="{{ url_for('app.search') }}" method="POST" autocomplete="off">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(id="search-input", class="form-control") }}
+        {% for error in form.name.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div id="suggestion-box" style="display: none; border: 1px solid #ddd; max-height: 200px; overflow-y: auto; position: absolute; background-color: #fff; z-index: 1000;"></div>
+    <button type="submit" class="btn btn-primary">Search</button>
+    <a href="{{ url_for('app.home') }}" class="btn btn-danger">Cancel</a>
+</form>
+
+<script>
+    // Array of hero names for the placeholder
+    const heroNames = [
+        'Spider-Man',
+        'Iron Man',
+        'Wonder Woman',
+        'Batman',
+        'Superman',
+        'Ozymandias',
+        'Godzilla',
+        'Black Panther',
+        'Captain America',
+        'Thor',
+        'Hulk',
+        'Wolverine',
+        'Master Chief',
+        'Joker',
+        'Deadpool',
+        'Captain Marvel',
+        'Black Widow',
+        'Hawkeye',
+        'Doctor Strange',
+        'Captain America',
+        'Deadpool',
+        'Goku',
+        'Catwoman'
+        ];
+
+    // Get the search input element
+    const searchInput = document.getElementById('search-input');
+
+    let lastIndex = -1;
+
+    // Function to get a random index, ensuring it's different from the last one
+    function getRandomIndex() {
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * heroNames.length);
+        } while (randomIndex === lastIndex); 
+        lastIndex = randomIndex;
+        return randomIndex;
+    }
+
+    // Function to rotate placeholder text with a random hero name
+    function changePlaceholder() {
+        const randomIndex = getRandomIndex();
+        searchInput.setAttribute('placeholder', heroNames[randomIndex]);
+    }
+
+    // Start by immediately changing the placeholder
+    changePlaceholder();
+
+    // Then change the placeholder every 3 seconds
+    setInterval(changePlaceholder, 3000);
+</script>
+
+{% endblock %}

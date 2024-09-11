@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Favorites{% endblock %}
+
+{% block content %}
+<h1>Favorites</h1>
+
+<form method="get" action="{{ url_for('app.favorites') }}">
+    <div>
+        <input type="checkbox" name="alignment" value="good" id="good" {% if 'good' in request.args.getlist('alignment') %}checked{% endif %}>
+        <label for="good">Good</label>
+    </div>
+    <div>
+        <input type="checkbox" name="alignment" value="bad" id="bad" {% if 'bad' in request.args.getlist('alignment') %}checked{% endif %}>
+        <label for="bad">Bad</label>
+    </div>
+    <div>
+        <input type="checkbox" name="alignment" value="neutral" id="neutral" {% if 'neutral' in request.args.getlist('alignment') %}checked{% endif %}>
+        <label for="neutral">Neutral</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+    <a href="{{ url_for('app.home') }}" class="btn btn-secondary">Back</a>
+</form>
+
+
+{% if favorites %}
+    <div class="character-list">
+        {% for favorite in favorites %}
+            <div class="character-container {% if favorite.character.biography['alignment'] == 'good' %}good-alignment{% elif favorite.character.biography['alignment'] == 'bad' %}bad-alignment{% else %}neutral-alignment{% endif %}">
+                <h2>{{ favorite.character.name }}</h2>
+                {% if favorite.character.image %}
+                    <img src="{{ favorite.character.image.url }}" class="character-image" alt="Image of {{ favorite.character.name }}">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+                <p><strong>Full Name:</strong> {{ favorite.character.biography['full-name'] or 'N/A' }}</p>
+                <p><strong>Aliases:</strong> {{ favorite.character.biography.aliases | join(', ') or 'None' }}</p>
+                <p><strong>Place of Birth:</strong> {{ favorite.character.biography['place-of-birth'] or 'N/A' }}</p>
+                <p><strong>First Appearance:</strong> {{ favorite.character.biography['first-appearance'] or 'N/A' }}</p>
+                <p><strong>Publisher:</strong> {{ favorite.character.biography.publisher or 'N/A' }}</p>
+                <p><strong>Alignment:</strong> {{ favorite.character.biography.alignment or 'Unknown' }}</p>
+                <form action="{{ url_for('app.remove_favorite', character_id=favorite.character.api_id) }}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this favorite?');">X</button>
+                </form>
+                <p><small>Remove</small></p>
+                <hr>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No favorites found.</p>
+{% endif %}
+{% endblock %}
+
