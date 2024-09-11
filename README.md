@@ -26,5 +26,7 @@ Descriptions
 
 URL: https://superheroapi.com/?ref=apilist.fun
 
+DATABASE SETUP COMMAND:
+psql -U username -f setup.sql
 
 Deployed URL : 
