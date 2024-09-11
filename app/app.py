@@ -13,7 +13,6 @@ import json
 # Load environment variables
 load_dotenv()
 
-
 # Initialize Blueprint
 bp = Blueprint('app', __name__)
 
